@@ -4,7 +4,6 @@ import com.musicweb.entity.UserEntiy;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 @Mapper
