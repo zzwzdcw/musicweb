@@ -16,9 +16,13 @@ public class RegisterController {
     private RegisterServiceInterface registerServiceInterface;
     @RequestMapping("/register")
     public String Register(String name,String pwd,String account){
+        System.out.println("注册服务开始");
+        if ( registerServiceInterface.Register(name,account,pwd)==1){
+            return "注册成功";
 
-        registerServiceInterface.Register(name, account, DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT));
-        return "自己看去";
+        }
+        else
+            return "error";
     }
 
 }

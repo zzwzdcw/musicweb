@@ -9,12 +9,18 @@ public class UserEntiy {
     protected String pwd;
     protected String account;
 
+
     public UserEntiy() {
     }
 
     public UserEntiy(int id, String name, String pwd, String account) {
         this.id = id;
         this.name = name;
+        this.pwd = pwd;
+        this.account = account;
+    }
+
+    public UserEntiy(String pwd, String account) {
         this.pwd = pwd;
         this.account = account;
     }

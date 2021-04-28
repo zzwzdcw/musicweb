@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 @Mapper
-@Repository
 public interface LoginDao {
     /***
      * 登录

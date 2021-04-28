@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 @Mapper
-@Repository
 public interface RegisterDao {
     /***
      * 注册模块
@@ -16,6 +15,6 @@ public interface RegisterDao {
      * @return
      */
     @Insert("insert into user(name,pwd,account) values (#{name},#{pwd},#{account})")
-    UserEntiy register(String name, String pwd, String account);
+    int register(String name, String pwd, String account);
 
 }

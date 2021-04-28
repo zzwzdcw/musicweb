@@ -1,8 +1,6 @@
 package com.musicweb.controller;
 
 import com.musicweb.service.LoginServiceInterface;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,8 +29,7 @@ public class LoginController {
         return "密码正确";
         }
        // return mv;
-        return "error";
-
+        return "forward:Login.html";
     }
 
 

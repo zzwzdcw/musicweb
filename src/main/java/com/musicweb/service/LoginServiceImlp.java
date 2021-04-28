@@ -2,7 +2,10 @@ package com.musicweb.service;
 
 import com.musicweb.dao.LoginDao;
 import com.musicweb.entity.UserEntiy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 
@@ -27,5 +30,13 @@ public class LoginServiceImlp implements LoginServiceInterface{
             System.out.println(PwdInDB);
         }
         return PwdInDB;
+    }
+
+    @Controller
+    public class HelloController {
+        @RequestMapping("/")
+        public String hello(){
+            return "forward:Login.html";
+        }
     }
 }
