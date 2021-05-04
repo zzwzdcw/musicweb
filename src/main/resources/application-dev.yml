@@ -1,12 +1,12 @@
-spring.datasource.url=jdbc:mysql://121.5.188.89:3306/musicweb
-spring.datasource.username=musicweb
-spring.datasource.password=4kJRMWJNBx3cXKnW
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-spring:
-  datasource:
-    url: jdbc:mysql://121.5.188.89:3306/musicweb
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
-;
+#spring.datasource.url=jdbc:mysql://121.5.188.89:3306/musicweb
+#spring.datasource.username=musicweb
+#spring.datasource.password=4kJRMWJNBx3cXKnW
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#
+#spring:
+#  datasource:
+#    url: jdbc:mysql://121.5.188.89:3306/musicweb
+#    username: root
+#    password: 123456
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#;

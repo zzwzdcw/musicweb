@@ -32,11 +32,4 @@ public class LoginServiceImlp implements LoginServiceInterface{
         return PwdInDB;
     }
 
-    @Controller
-    public class HelloController {
-        @RequestMapping("/")
-        public String hello(){
-            return "forward:Login.html";
-        }
-    }
 }
