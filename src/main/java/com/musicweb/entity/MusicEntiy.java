@@ -8,6 +8,15 @@ public class MusicEntiy {
     protected String name;
     protected String author;
     protected String music;
+    protected String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public MusicEntiy(int id, String name, String author, String music) {
         this.id = id;

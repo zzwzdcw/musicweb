@@ -34,13 +34,7 @@ public class LoginController {
        // return mv;
         return "forward:Login.html";
     }
-    @Controller
-    public class HelloController {
-        @RequestMapping("/")
-        public String hello(){
-            return "forward:index.html";
-        }
-    }
+
 
     @RequestMapping("/hello")
     public String hello(){
