@@ -14,7 +14,7 @@
     <link href="../static/css/bootstrap3_player.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="../static/js/bootstrap3_player.js"></script>
-
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -62,10 +62,13 @@
                     <th>歌手</th>
                 </tr>
                 </thead>
-                <tbody th:each="MusicEntiy:${musicEntiys}">
-                <tr>
-                    <td th:text= "${MusicEntiy.getId()}"></td>
-                    <td th:text= "${MusicEntiy.getName()}"></td>
+                <tbody >
+                <tr th:each="MusicEntiy:${musicEntiys}">
+                    <td th:text= "${MusicEntiy.getId()}" ></td>
+<!--                    <td th:text= "${MusicEntiy.getName()}" >-->
+                    <td>
+                         <a th:href="${MusicEntiy.getMusic()}" target="audioiframe"> <p th:text="${MusicEntiy.getName()}"></p> </a>
+                    </td>
                     <td th:text= "${MusicEntiy.getTime()}"></td>
                     <td th:text= "${MusicEntiy.getAuthor()}"></td>
                 </tr>
@@ -102,16 +105,22 @@
                 <div class="col-md-4 column">
                 </div>
             </div>
-            <div class="row col-md-6 col-md-offset-3 col-xs-12">
-                <audio controls>
-                    <source src="http://www.w3schools.com/html/horse.mp3" type="audio/mpeg" />
-                    <a href="http://www.w3schools.com/html/horse.mp3">horse</a>
-                    An html5-capable browser is required to play this audio.
-                </audio>
-            </div>
-        </div>
-        <div class="progress">
-            <div class="progress-bar progress-success"></div>
+
+
+                    <div class="container" th:align="center" >
+                        <iframe th:background="${http://oss.wzszz.top/musicweb/img/imgb.png}" class="responsive-iframe" src="http://oss.wzszz.top/musicweb/music/%E7%8E%8B%E4%B8%89%E6%BA%A5%20-%20%E5%B9%BB.mp3" name="audioiframe" > </iframe>
+                    </div>
+
+
+
+<!--            <div class="row col-md-6 col-md-offset-3 col-xs-12"  >-->
+
+<!--                <audio controls>-->
+<!--&lt;!&ndash;                    <source th:src="sdsd.mp3" type="audio/mpeg" id="source1"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a href="http://www.w3schools.com/html/horse.mp3">horse</a>&ndash;&gt;-->
+<!--                    An html5-capable browser is required to play this audio.-->
+<!--                </audio>-->
+<!--            </div>-->
         </div>
     </div>
 </div>

@@ -9,6 +9,24 @@ public class MusicEntiy {
     protected String author;
     protected String music;
     protected String time;
+    protected String imgb;
+    protected String img;
+
+    public String getImgb() {
+        return imgb;
+    }
+
+    public void setImgb(String imgb) {
+        this.imgb = imgb;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getTime() {
         return time;

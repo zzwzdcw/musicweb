@@ -12,6 +12,7 @@ import java.util.List;
 public class IndexController {
     @RequestMapping("/")
     public String hello(Model model){
+        //TODO 这里的东西之后要从数据库获取
         MusicEntiy musicEntiy =new MusicEntiy();
         List<MusicEntiy> musicEntiys = new LinkedList<MusicEntiy>();
         for (int i=0;i<5;i++){
@@ -19,6 +20,8 @@ public class IndexController {
             musicEntiy.setAuthor("作者 "+ i);
             musicEntiy.setTime("3:00");
             musicEntiy.setId(i+1);
+            musicEntiy.setMusic("http://oss.wzszz.top/musicweb/music/%E7%8E%8B%E4%B8%89%E6%BA%A5%20-%20%E5%B9%BB.mp3");
+            musicEntiy.setImgb("http://oss.wzszz.top/musicweb/img/imgb.png");
             musicEntiys.add(musicEntiy);
         }
 
@@ -29,8 +32,6 @@ public class IndexController {
         model.addAttribute("musicEntiys",musicEntiys);
 
         return "index";
-
-//        return "forward:index.html";
 
     }
 
