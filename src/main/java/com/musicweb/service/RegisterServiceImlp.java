@@ -9,29 +9,34 @@ import javax.annotation.Resource;
 import java.util.Locale;
 
 @Service
-public class RegisterServiceImlp implements RegisterServiceInterface{
+public class RegisterServiceImlp implements RegisterServiceInterface {
 
 
     @Resource
     protected RegisterDao registerDao;
+
     @Override
-    public int Register(String name, String account, String pwd,String pwd2) {
+    public int Register(String name, String account, String pwd, String pwd2) {
 
-            System.out.println("注册"+"name:"+name+"pwd:"+pwd+"account:"+account+"pwd2"+pwd2);
+        System.out.println("注册" + "name:" + name + "pwd:" + pwd + "account:" + account + "pwd2" + pwd2);
 
-
-            if (registerDao.hasUser(account)==account)
-            {
-                //该用户名已经存在
-                return -2;
-            }
-            int flag=registerDao.register(name,DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT),account);
-            if (flag!=-1)
-            {
-                System.out.println("注册成功！"+flag);
+        if (registerDao.hasUser(account)==null) {
+            int flag = registerDao.register(name, DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT), account);
+            if (flag != -1) {
+                System.out.println("注册成功！" + flag);
                 return flag;
-            }else {
+            } else {
+                /**
+                 * 这里是插入失败的意思
+                 */
                 return -1;
             }
+        }
+        if (registerDao.hasUser(account).equals(account)) {
+            //该用户名已经存在
+            return -2;
+        }
+        return -1;
+
     }
 }

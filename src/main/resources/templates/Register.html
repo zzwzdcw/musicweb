@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>注册页面</title>
@@ -15,6 +15,7 @@
                 </div>
                 <div class="col-md-4 column" align="center">
                     <img alt="140x140" src="/img/8c48dc3d70cf3bc797db400dd000baa1cc112a3d.png" class="img-circle" />
+                    <p th:text="${stat}"></p>
                     <form class="form-horizontal" role="form" method="post" action = "register">
                         <div class="form-group" >
                             <label for="name" class="col-sm-2 control-label">昵称</label>

@@ -17,7 +17,6 @@ public class IndexController {
 
     @RequestMapping("/")
     public String hello(Model model){
-        //TODO 这里的东西之后要从数据库获取
 
         List<MusicEntiy> musicEntiys =musicServiceInterface.selectAllMusic();
         String name ="二泉映月";
