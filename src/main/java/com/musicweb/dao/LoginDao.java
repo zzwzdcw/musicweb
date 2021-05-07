@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Mapper
 public interface LoginDao {
-    /***
+    /**
      * 登录
      * @param account
      * @return

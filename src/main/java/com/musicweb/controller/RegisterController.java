@@ -15,8 +15,7 @@ import java.util.Locale;
 
 @RestController
 public class RegisterController {
-//    TODO 29号加进去注册的页面
-//     29号去做wintogo了，没做注册页面今天三十号做了
+
     @Resource
     private RegisterServiceInterface registerServiceInterface;
     @RequestMapping("/register")
@@ -26,10 +25,14 @@ public class RegisterController {
         if (!pwd.equals(pwd2)){
             return "两次密码不匹配错误";
         }
-        if ( registerServiceInterface.Register(name,account,pwd,pwd2)!=-1){
+        int flag=registerServiceInterface.Register(name,account,pwd,pwd2);
+         if (flag==-2)
+        {
+            return "该用户已被注册";
+        }
+        if ( flag==1){
             return "注册成功";
         }
-        else
             return "error";
     }
     @RequestMapping("/first")

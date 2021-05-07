@@ -82,6 +82,10 @@ public class MusicEntiy {
         this.music = music;
     }
 
+    public String getIdForString(){
+        return Integer.toString(this.id);
+    }
+
     @Override
     public String toString() {
         return "MusicEntiy{" +

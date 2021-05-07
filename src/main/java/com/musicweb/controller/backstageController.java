@@ -5,17 +5,17 @@ import com.musicweb.service.MusicServiceInterface;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
-public class IndexController {
+public class backstageController {
     @Resource
     private MusicServiceInterface musicServiceInterface;
 
-    @RequestMapping("/")
+    @RequestMapping("/backstage")
     public String hello(Model model){
         //TODO 这里的东西之后要从数据库获取
 
@@ -26,8 +26,16 @@ public class IndexController {
 
         model.addAttribute("musicEntiys",musicEntiys);
 
-        return "index";
+        return "backstage";
 
     }
 
+    @RequestMapping("/delonemusic")
+    public String delOneMusic(int id){
+        if (musicServiceInterface.delOneMusicByID(id)==0)
+        {
+        return "error";
+        }
+        return "backstage.html";
+    }
 }

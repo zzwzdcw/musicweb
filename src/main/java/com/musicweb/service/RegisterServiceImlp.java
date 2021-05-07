@@ -18,6 +18,13 @@ public class RegisterServiceImlp implements RegisterServiceInterface{
     public int Register(String name, String account, String pwd,String pwd2) {
 
             System.out.println("注册"+"name:"+name+"pwd:"+pwd+"account:"+account+"pwd2"+pwd2);
+
+
+            if (registerDao.hasUser(account)==account)
+            {
+                //该用户名已经存在
+                return -2;
+            }
             int flag=registerDao.register(name,DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT),account);
             if (flag!=-1)
             {
@@ -25,7 +32,6 @@ public class RegisterServiceImlp implements RegisterServiceInterface{
                 return flag;
             }else {
                 return -1;
-
             }
     }
 }
