@@ -39,9 +39,9 @@ public class RegisterController {
             return "Register";
         }
         if ( flag==1){
-            return "Register";
+            return "Login";
         }
-            return "Login.html";
+            return "Login";
     }
     @RequestMapping("/first")
     public String first(){

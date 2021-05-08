@@ -15,14 +15,11 @@ public class backstageController {
     @Resource
     private MusicServiceInterface musicServiceInterface;
 
-    @RequestMapping("/backstage")
+    @RequestMapping("/background/backstage")
     public String hello(Model model){
         //TODO 这里的东西之后要从数据库获取
 
         List<MusicEntiy> musicEntiys =musicServiceInterface.selectAllMusic();
-        String name ="二泉映月";
-        String time ="3:00";
-        String author ="测试文档";
 
         model.addAttribute("musicEntiys",musicEntiys);
 
@@ -31,11 +28,12 @@ public class backstageController {
     }
 
     @RequestMapping("/delonemusic")
-    public String delOneMusic(int id){
+    public String delOneMusic(int id,Model model){
         if (musicServiceInterface.delOneMusicByID(id)==0)
         {
         return "error";
         }
+        this.hello(model);
         return "backstage.html";
     }
 }
