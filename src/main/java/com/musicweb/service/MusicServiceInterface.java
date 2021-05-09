@@ -12,5 +12,6 @@ public interface MusicServiceInterface {
 
     int delOneMusicByID(int id);
 
+    int AddMusic(String name,String time,String InputFile,String author);
 
 }

@@ -16,24 +16,94 @@
     <script src="js/bootstrap3_player.js"></script>
 </head>
 <body>
-<table class="table table-hover table-condensed" th:each="MusicEntiy:${musicEntiys}">
-    <thead>
-    <tr>
-        <th>编号</th>
-        <th>歌名</th>
-        <th>时长</th>
-        <th>歌手</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td th:text= "${MusicEntiy.getId()}"></td>
-        <td th:text= "${MusicEntiy.getName()}"></td>
-        <td th:text= "${MusicEntiy.getTime()}"></td>
-        <td th:text= "${MusicEntiy.getAuthor()}"></td>
-    </tr>
-    </tbody>
-</table>
 
+<div class="row clearfix">
+    <div class="col-md-2 column">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Panel title
+                </h3>
+            </div>
+            <div class="panel-body">
+                Panel content
+            </div>
+            <div class="panel-footer">
+                Panel footer
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 column">
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+            </div>
+            <div class="col-md-8 column">
+                <form role="form" method="post" action="Test">
+                    <div class="form-group">
+                        <label for="name">名称</label><input type="text" class="form-control" id="name" name="name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">作者</label><input type="text" class="form-control" id="author" name="author"/>
+                    </div>
+                    <div>
+                        <label for="time">时长</label><input type="text" class="form-control" id="time" value="选择文件后自动获取" name="time">
+                    </div>
+                    <div>
+                        <label for="path">路径</label><input type="text" class="form-control" id="path" value="选择文件后自动获取" name="path">
+                    </div>
+                    <div class="form-group">
+                        <label for="InputFile">File input</label><input type="file" id="InputFile" name="InputFile"/>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+            <div class="col-md-2 column">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2 column">
+    </div>
+</div>
+<script type="text/javascript">
+
+    var audio = document.createElement('audio');
+
+    document.getElementById("InputFile").addEventListener('change', function (event) {
+        var target = event.currentTarget;
+        var file = target.files[0];
+        var reader = new FileReader();
+
+        if (target.files && file) {
+            var reader = new FileReader(
+            );
+            reader.onload = function (e) {
+                audio.src = e.target.result;
+                audio.addEventListener('loadedmetadata', function () {
+                    var time = audio.duration;
+                    var h = Math.floor(time / 3600);
+                    var m = Math.floor((time / 60 % 60));
+                    var s = Math.floor((time % 60));
+                    var result;
+                    if (h > 0) {
+                        if (s < 10) {
+                            s = "0" + s
+                        }
+
+                        result = h + ":" + m + ":" + s + ":";
+
+                    } else {
+                        if (s < 10) {
+                            s = "0" + s
+                        }
+                        result = m + ":" + s;
+                    }
+                    document.getElementById("time").value = result;
+                }, false);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }, false);
+</script>
 </body>
 </html>

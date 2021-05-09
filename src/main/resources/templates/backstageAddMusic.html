@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>音乐上传</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
+    <link href="../static/css/bootstrap3_player.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/js/bootstrap3_player.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"><span
+                            class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="/">MUSICWEB</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="/">首页</a>
+                        </li>
+                        <li>
+                            <a href="background.html">后台</a>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li>
+                            <a href="/register.html">注销</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Panel title
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+                <div class="panel-footer">
+                    Panel footer
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 column">
+            <div class="row clearfix">
+                <div class="col-md-2 column">
+                </div>
+                <div class="col-md-8 column">
+                    <form role="form" method="post" action="Addmusic" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="name">名称</label><input type="text" class="form-control" id="name" name="name" value="选择文件后自动获取"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="author">作者</label><input type="text" class="form-control" id="author" name="author"/>
+                        </div>
+                        <div>
+                            <label for="time">时长</label><input type="text" class="form-control" id="time" value="选择文件后自动获取" name="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="multipartFile">File input</label><input type="file" id="multipartFile" name="multipartFile"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">上传</button>
+                    </form>
+                </div>
+                <div class="col-md-2 column">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2 column">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var audio = document.createElement('audio');
+
+    document.getElementById("multipartFile").addEventListener('change', function (event) {
+        var target = event.currentTarget;
+        var file = target.files[0];
+        var reader = new FileReader();
+
+        if (target.files && file) {
+             reader = new FileReader(
+            );
+            reader.onload = function (e) {
+                audio.src = e.target.result;
+                audio.addEventListener('loadedmetadata', function () {
+                    var time = audio.duration;
+                    var h = Math.floor(time / 3600);
+                    var m = Math.floor((time / 60 % 60));
+                    var s = Math.floor((time % 60));
+                    var result;
+                    if (h > 0) {
+                        if (s < 10) {
+                            s = "0" + s
+                        }
+
+                        result = h + ":" + m + ":" + s + ":";
+
+                    } else {
+                        if (s < 10) {
+                            s = "0" + s
+                        }
+                        result = m + ":" + s;
+                    }
+                    document.getElementById("time").value = result;
+                    document.getElementById("name").value = file.name;
+                }, false);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }, false);
+</script>
+
+</body>
+</html>

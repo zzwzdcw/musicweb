@@ -57,7 +57,7 @@
                             </h3>
                         </div>
                         <div class="panel-body">
-                            Panel content
+                            <a href="/background/addmusic">添加音乐</a>
                         </div>
                         <div class="panel-footer">
                             Panel footer
@@ -82,8 +82,7 @@
                             <td th:text= "${MusicEntiy.getTime()}"></td>
                             <td th:text= "${MusicEntiy.getAuthor()}"></td>
                             <td>
-                                <!--TODO 在这里试图增加删除的功能，人生不易没做出来呢-->
-                            <form method="get" action="delonemusic">
+                            <form method="get" action="/background/delonemusic">
                                 <input type="checkbox" th:name="id" th:value="${MusicEntiy.getId()}"/>
                             <button type="submit" class="btn btn-default">删除</button>
                             </form>

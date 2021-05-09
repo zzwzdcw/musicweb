@@ -2,6 +2,7 @@ package com.musicweb.dao;
 
 import com.musicweb.entity.MusicEntiy;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -23,4 +24,18 @@ public interface MusicDAO {
      */
     @Delete("DELETE FROM music WHERE id=#{id}")
     int delOneMusicByID(int id);
+
+    /**
+     * 插入一个音乐数据到数据库
+     * @param name
+     * @param time
+     * @param music
+     * @param author
+     * @return
+     */
+
+//    @Insert("insert into user(name,pwd,account) values (#{name},#{pwd},#{account})")
+
+    @Insert("Insert INTO music (name,time,music,author) values(#{name},#{time},#{music},#{author})")
+    int AddMusic(String name, String time,String music, String author);
 }
