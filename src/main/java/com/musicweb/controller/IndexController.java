@@ -15,18 +15,21 @@ public class IndexController {
     @Resource
     private MusicServiceInterface musicServiceInterface;
 
+
+
+    /**
+     * 首页的展示
+     * @param model
+     * @return
+     */
     @RequestMapping("/")
     public String hello(Model model){
 
         List<MusicEntiy> musicEntiys =musicServiceInterface.selectAllMusic();
-        String name ="二泉映月";
-        String time ="3:00";
-        String author ="测试文档";
-
         model.addAttribute("musicEntiys",musicEntiys);
 
         return "index";
-
+ 
     }
 
 }

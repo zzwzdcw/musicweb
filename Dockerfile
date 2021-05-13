@@ -1,4 +1,5 @@
-FROM java:latest
-VOLUME /tmp
-ADD target/musicweb-0.0.1-SNAPSHOT.jar app.jar
+FROM adoptopenjdk/openjdk11
+COPY *jar /app.jar
+CMD ["--server.port=8081"]
+EXPOSE 10270
 ENTRYPOINT ["java","-jar","/app.jar"]

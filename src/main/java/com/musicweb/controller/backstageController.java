@@ -8,6 +8,7 @@ import com.qiniu.util.Auth;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,10 +21,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.ObjectInputFilter;
+import java.io.*;
 import java.util.List;
 
 @Controller
@@ -87,13 +85,31 @@ public class backstageController {
     @RequestMapping("/background/Addmusic")
     public String AddMusic(String name,String time,String author,Model model,MultipartFile multipartFile) throws Exception {
         InputStream inputStream=multipartFile.getInputStream();
-        File file = new File("/file/upload/"+name);
-
-        FileOutputStream fileOutputStream = new FileOutputStream("/file/upload/"+name);
+        String InputFilePat=this.getUploadPath()+name;
+        File file = new File(InputFilePat);
+        System.out.println("应该上传到的位置是这里");
+        System.out.println(this.getUploadPath()+name);
+        FileOutputStream fileOutputStream = new FileOutputStream(InputFilePat);
         fileOutputStream.write(inputStream.readAllBytes());
-        musicServiceInterface.AddMusic(name,time,"/file/upload"+name,author);
+        musicServiceInterface.AddMusic(name,time,InputFilePat,author);
         this.addmusic(model);
         return "backstageAddMusic";
+    }
+
+    /**
+     * 获取当前系统路径
+     */
+    private String getUploadPath() {
+        File path = null;
+        try {
+            path = new File(ResourceUtils.getURL("classpath:").getPath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (!path.exists()) path = new File("");
+        File upload = new File(path.getAbsolutePath(), "static/upload/");
+        if (!upload.exists()) upload.mkdirs();
+        return upload.getAbsolutePath();
     }
 
 
