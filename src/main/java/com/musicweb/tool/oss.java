@@ -21,13 +21,14 @@ public class oss {
     private final static String prefix = "musicweb/music/";
 
     public static String musicFileSimpUp(String InputFile,String name) {
+        System.out.println("这里是准备在七牛云上传的地方");
         System.out.println(InputFile);
         String key = prefix + name;
         Auth auth = Auth.create(accessKey, secretKey);
         String upToken=auth.uploadToken(bucket, key);
 //        System.out.println(auth.uploadToken(bucket, key));
         try {
-            Response response = uploadManager.put(InputFile, name, upToken);
+            Response response = uploadManager.put(InputFile, key, upToken);
             //解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
             System.out.println(putRet.key);

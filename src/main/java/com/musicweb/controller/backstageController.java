@@ -73,7 +73,6 @@ public class backstageController {
 
     /**
      * 添加音乐文件到数据库以及oss中
-     * TODO 得不到文件的具体路径，之后尝试一下用用看先传入服务器之后从服务器传到oss
      * @param name
      * @param time
      * @param multipartFile
@@ -85,12 +84,13 @@ public class backstageController {
     @RequestMapping("/background/Addmusic")
     public String AddMusic(String name,String time,String author,Model model,MultipartFile multipartFile) throws Exception {
         InputStream inputStream=multipartFile.getInputStream();
-        String InputFilePat=this.getUploadPath()+name;
+        String InputFilePat=this.getUploadPath()+"\\"+name;
         File file = new File(InputFilePat);
         System.out.println("应该上传到的位置是这里");
-        System.out.println(this.getUploadPath()+name);
+        System.out.println(InputFilePat);
         FileOutputStream fileOutputStream = new FileOutputStream(InputFilePat);
         fileOutputStream.write(inputStream.readAllBytes());
+        System.out.println("文件上传成功！");
         musicServiceInterface.AddMusic(name,time,InputFilePat,author);
         this.addmusic(model);
         return "backstageAddMusic";
@@ -112,5 +112,13 @@ public class backstageController {
         return upload.getAbsolutePath();
     }
 
+
+    /**
+     * TODO 接下来做删除的
+     * @return
+     */
+    public String DelOneMusic(){
+        return "ok";
+    }
 
 }
