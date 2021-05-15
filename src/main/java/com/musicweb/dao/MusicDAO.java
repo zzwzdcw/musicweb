@@ -1,5 +1,6 @@
 package com.musicweb.dao;
 
+import com.musicweb.entity.GoodLrc;
 import com.musicweb.entity.MusicEntiy;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -36,6 +37,24 @@ public interface MusicDAO {
 
 //    @Insert("insert into user(name,pwd,account) values (#{name},#{pwd},#{account})")
 
+    /**
+     * 添加音乐
+     * @param name
+     * @param time
+     * @param music
+     * @param author
+     * @return
+     */
     @Insert("Insert INTO music (name,time,music,author) values(#{name},#{time},#{music},#{author})")
     int AddMusic(String name, String time,String music, String author);
+
+    /**
+     * 搜索音乐返回
+     * @return
+     */
+    @Select("Select * from music where name like #{findstr}")
+    List<MusicEntiy> selectAllMusicByFind(String findstr);
+
+    @Select("select * from goodlrc where id = #{id}")
+    GoodLrc getonegoodlrc(int id);
 }

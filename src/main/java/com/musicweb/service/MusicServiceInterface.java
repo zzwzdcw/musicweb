@@ -1,5 +1,6 @@
 package com.musicweb.service;
 
+import com.musicweb.entity.GoodLrc;
 import com.musicweb.entity.MusicEntiy;
 import org.apache.ibatis.annotations.Select;
 
@@ -13,5 +14,9 @@ public interface MusicServiceInterface {
     int delOneMusicByID(int id);
 
     int AddMusic(String name,String time,String InputFile,String author);
+
+    List<MusicEntiy>  selectAllMusicByFind(String findstr);
+
+    String getonegoodlrc();
 
 }

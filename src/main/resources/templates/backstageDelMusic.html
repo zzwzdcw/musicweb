@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <title>音乐后台</title>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
     <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+          integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
 
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+            integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+            crossorigin="anonymous"></script>
     <link href="../static/css/bootstrap3_player.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="../static/js/bootstrap3_player.js"></script>
@@ -22,7 +26,11 @@
         <div class="col-md-12 column">
             <nav class="navbar navbar-default navbar-static-top" role="navigation">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">MUSICWEB</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1"><span
+                            class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span
+                            class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="/">MUSICWEB</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -36,8 +44,9 @@
                     </ul>
                     <form class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" />
-                        </div> <button type="submit" class="btn btn-default">Submit</button>
+                            <input type="text" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
 
@@ -56,29 +65,37 @@
                         </div>
                         <div class="panel-body">
                             <a href="/background/backstage" th:align="center">所有音乐</a>
-                            <br>
+                                <br>
                             <a href="/background/addmusic" th:align="center">添加音乐</a>
-                            <br>
+                                <br>
                             <a href="/background/DelOneMusic" th:align="center">删除音乐</a>
                         </div>
-                        </div>
+                        <div class="panel-footer"></div>
+                    </div>
                 </div>
                 <div class="col-md-10 column">
-                    <table class="table table-hover table-condensed" >
+                    <table class="table table-hover table-condensed">
                         <thead>
                         <tr>
                             <th>编号</th>
                             <th>歌名</th>
                             <th>时长</th>
                             <th>歌手</th>
+                            <th>删除</th>
                         </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                         <tr th:each="MusicEntiy:${musicEntiys}">
-                            <td th:text= "${MusicEntiy.getId()}"></td>
+                            <td th:text="${MusicEntiy.getId()}"></td>
                             <td th:text="${MusicEntiy.getName()}"></td>
-                            <td th:text= "${MusicEntiy.getTime()}"></td>
-                            <td th:text= "${MusicEntiy.getAuthor()}"></td>
+                            <td th:text="${MusicEntiy.getTime()}"></td>
+                            <td th:text="${MusicEntiy.getAuthor()}"></td>
+                            <td>
+                                <form method="get" action="/background/delonemusic">
+                                    <input type="checkbox" th:name="id" th:value="${MusicEntiy.getId()}"/>
+                                    <button type="submit" class="btn btn-default">删除</button>
+                                </form>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

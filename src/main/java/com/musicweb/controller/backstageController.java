@@ -46,7 +46,23 @@ public class backstageController {
     }
 
     /**
-     * 删除一个音乐，如果失败成功都通过 this.hello 返回后台
+     * 删除的页面控制器
+     * @return
+     */
+
+
+    @RequestMapping("/background/DelOneMusic")
+    public String DelOneMusic(Model model){
+        List<MusicEntiy> musicEntiys =musicServiceInterface.selectAllMusic();
+
+        model.addAttribute("musicEntiys",musicEntiys);
+
+        return "backstageDelMusic";
+    }
+
+
+    /**
+     * 删除一个音乐，成功或者失败都会返回到删除界面
      * @param id
      * @param model
      * @return
@@ -55,10 +71,18 @@ public class backstageController {
     public String delOneMusic(int id,Model model){
         if (musicServiceInterface.delOneMusicByID(id)==0)
         {
-            this.hello(model);
+
+            List<MusicEntiy> musicEntiys =musicServiceInterface.selectAllMusic();
+
+            model.addAttribute("musicEntiys",musicEntiys);
+
+            return "backstageDelMusic";
         }
-            this.hello(model);
-        return "backstage.html";//其实根本不从这里结束
+        List<MusicEntiy> musicEntiys =musicServiceInterface.selectAllMusic();
+
+        model.addAttribute("musicEntiys",musicEntiys);
+
+        return "backstageDelMusic";
     }
 
     /**
@@ -113,12 +137,5 @@ public class backstageController {
     }
 
 
-    /**
-     * TODO 接下来做删除的
-     * @return
-     */
-    public String DelOneMusic(){
-        return "ok";
-    }
 
 }

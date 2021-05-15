@@ -1,6 +1,7 @@
 package com.musicweb.service;
 
 import com.musicweb.dao.MusicDAO;
+import com.musicweb.entity.GoodLrc;
 import com.musicweb.entity.MusicEntiy;
 import com.musicweb.tool.oss;
 import com.qiniu.util.Auth;
@@ -10,10 +11,18 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+
 
 
 @Service
 public class MusicServiceImlp implements MusicServiceInterface{
+
+    /**
+     * goodlrc表的上限
+     */
+    final int MAX_GOODLRC_LINE = 9;
+
 
     @Resource
     protected MusicDAO MusicDAO;
@@ -46,6 +55,18 @@ public class MusicServiceImlp implements MusicServiceInterface{
         return 1;
     }
 
+    @Override
+    public List<MusicEntiy> selectAllMusicByFind(String findstr) {
+        findstr="%"+findstr+"%";
+       return MusicDAO.selectAllMusicByFind(findstr);
+    }
+
+    @Override
+    public String getonegoodlrc() {
+        final long l = System.currentTimeMillis();
+        final int i = (int)( l % (MAX_GOODLRC_LINE-1) )+1;
+        return MusicDAO.getonegoodlrc(i).toString();
+    }
 
 
 }

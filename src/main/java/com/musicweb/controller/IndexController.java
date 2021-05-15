@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Controller
-public class IndexController {
+public class IndexController{
     @Resource
     private MusicServiceInterface musicServiceInterface;
 
@@ -30,6 +30,24 @@ public class IndexController {
 
         return "index";
  
+    }
+
+    /**
+     *模糊查询歌曲
+     * @param model
+     * @param findstr
+     * @return
+     */
+    @RequestMapping("/findMusic")
+    public String findmusic(Model model ,String findstr){
+        model.addAttribute("musicEntiys",musicServiceInterface.selectAllMusicByFind(findstr));
+        return "index";
+    }
+
+    @RequestMapping("/goodlrc")
+    public String goodlrc(Model model){
+        model.addAttribute("str",musicServiceInterface.getonegoodlrc());
+        return "iframeshow";
     }
 
 }
