@@ -49,6 +49,7 @@ public class MusicServiceImlp implements MusicServiceInterface{
 
         String music="http://oss.wzszz.top/"+oss.musicFileSimpUp(InputFile,name);
         System.out.println(music);
+        name=name.replaceAll(".mp3|.flac","");
         if (MusicDAO.AddMusic(name,time,music,author)!=1){
             return 0;
         }

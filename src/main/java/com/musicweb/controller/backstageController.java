@@ -114,8 +114,15 @@ public class backstageController {
         System.out.println(InputFilePat);
         FileOutputStream fileOutputStream = new FileOutputStream(InputFilePat);
         fileOutputStream.write(inputStream.readAllBytes());
+        fileOutputStream.close();
         System.out.println("文件上传成功！");
         musicServiceInterface.AddMusic(name,time,InputFilePat,author);
+        inputStream.close();
+        if(file.delete()){
+            System.out.println(file.getName() + " 文件已被删除！");
+        }else{
+            System.out.println(file.getName() + "文件删除失败！");
+        }
         this.addmusic(model);
         return "backstageAddMusic";
     }
