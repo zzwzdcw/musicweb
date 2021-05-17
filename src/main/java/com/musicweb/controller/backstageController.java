@@ -110,19 +110,27 @@ public class backstageController {
         InputStream inputStream=multipartFile.getInputStream();
         String InputFilePat=this.getUploadPath()+"\\"+name;
         File file = new File(InputFilePat);
+        model.addAttribute("stat","正在上传到服务器");
         System.out.println("应该上传到的位置是这里");
         System.out.println(InputFilePat);
         FileOutputStream fileOutputStream = new FileOutputStream(InputFilePat);
         fileOutputStream.write(inputStream.readAllBytes());
         fileOutputStream.close();
         System.out.println("文件上传成功！");
+        model.addAttribute("stat","正在传输至oss");
         musicServiceInterface.AddMusic(name,time,InputFilePat,author);
         inputStream.close();
         if(file.delete()){
             System.out.println(file.getName() + " 文件已被删除！");
+            model.addAttribute("stat","删除服务器暂存文件成功");
+
         }else{
             System.out.println(file.getName() + "文件删除失败！");
+            model.addAttribute("stat","删除服务器暂存文件失败");
+
         }
+        model.addAttribute("stat","完成上传！");
+
         this.addmusic(model);
         return "backstageAddMusic";
     }
