@@ -17,7 +17,7 @@ public class LoginConfig  extends WebMvcConfigurationSupport  {
          *
          */
         registry.addInterceptor(new LoginInterceptor())
-                .addPathPatterns("/**")
+                .addPathPatterns("/background/**")
                 .excludePathPatterns("/","/register","/findMusic","/Login","/loginout","/login","/goodlrc","/Register","/static/**","/static/img","/static/js","/static/css");
 
     }

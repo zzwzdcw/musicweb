@@ -55,6 +55,20 @@ public interface MusicDAO {
     @Select("Select * from music where name like #{findstr}")
     List<MusicEntiy> selectAllMusicByFind(String findstr);
 
+    /**
+     * 获取那个下面的歌词的地儿，没啥意思我感觉
+     * @param id
+     * @return
+     */
     @Select("select * from goodlrc where id = #{id}")
     GoodLrc getonegoodlrc(int id);
+
+
+    /**
+     * 获取该作者的所有的音乐
+     * @param author
+     * @return
+     */
+    @Select("select * from music where author = #{author}")
+    List<MusicEntiy> selectAllAuthorMusic(String author);
 }

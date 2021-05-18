@@ -4,7 +4,9 @@ import com.musicweb.entity.MusicEntiy;
 import com.musicweb.service.MusicServiceInterface;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import java.util.LinkedList;
@@ -25,9 +27,7 @@ public class IndexController{
     @RequestMapping("/")
     public String hello(Model model){
 
-        List<MusicEntiy> musicEntiys =musicServiceInterface.selectAllMusic();
-        model.addAttribute("musicEntiys",musicEntiys);
-
+        model.addAttribute("musicEntiys",musicServiceInterface.selectAllMusic());
         return "index";
  
     }
@@ -48,6 +48,13 @@ public class IndexController{
     public String goodlrc(Model model){
         model.addAttribute("str",musicServiceInterface.getonegoodlrc());
         return "iframeshow";
+    }
+
+
+    @RequestMapping(value = "/findAuthor",method = RequestMethod.GET)
+    public String findAuthor(Model model,String author){
+        model.addAttribute("musicEntiys", musicServiceInterface.selectAllAuthorMusic(author));
+        return "index";
     }
 
 }

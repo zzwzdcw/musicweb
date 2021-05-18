@@ -19,4 +19,6 @@ public interface MusicServiceInterface {
 
     String getonegoodlrc();
 
+    List<MusicEntiy> selectAllAuthorMusic(String author);
+
 }
