@@ -1,6 +1,8 @@
 package com.musicweb.controller;
 
+import com.musicweb.entity.CommitEntiy;
 import com.musicweb.entity.MusicEntiy;
+import com.musicweb.service.CommitServiceImlp;
 import com.musicweb.service.MusicServiceInterface;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,9 @@ import java.util.List;
 public class IndexController{
     @Resource
     private MusicServiceInterface musicServiceInterface;
+
+    @Resource
+    private CommitServiceImlp commitServiceImlp;
 
 
 
@@ -56,5 +61,14 @@ public class IndexController{
         model.addAttribute("musicEntiys", musicServiceInterface.selectAllAuthorMusic(author));
         return "index";
     }
+//
+//    @RequestMapping(value = "/getCommit",method = RequestMethod.GET)
+//    public String getAllCommit(int musiceId, Model model){
+//
+//        model.addAttribute("CommitEntiys", commitServiceInterface.selectAllCommit(musiceId));
+//        return "commit";
+//
+//    }
+
 
 }

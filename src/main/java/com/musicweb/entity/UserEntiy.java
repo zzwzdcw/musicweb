@@ -8,6 +8,23 @@ public class UserEntiy {
     protected String name;
     protected String pwd;
     protected String account;
+    protected String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public UserEntiy(int id, String name, String pwd, String account, String img) {
+        this.id = id;
+        this.name = name;
+        this.pwd = pwd;
+        this.account = account;
+        this.img = img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     public String getAccount() {
         return account;
