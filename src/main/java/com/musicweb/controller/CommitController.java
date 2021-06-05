@@ -31,20 +31,26 @@ public class CommitController {
     @RequestMapping(value = "/commit/addCommit",method = RequestMethod.POST)
     public String addCommit(String Content, HttpSession session , Model model){
         //如果没有登录就返回原网页
-        if (session.getAttribute("userId") == null)
+        Object user = session.getAttribute("user");
+        if (user== null || user.equals(""))
         {
-            this.getAllCommit((Integer) session.getAttribute("musicId"),model,session);
-            return "commit";
+            System.out.println("没有登录");
+            return "redirect:/Login";
         }
 
         CommitEntiy commitEntiy=new CommitEntiy();
         commitEntiy.setContent(Content);
+        System.out.println(Content);
         commitEntiy.setMusiceid((Integer) session.getAttribute("musicId"));
-        commitEntiy.setUserid((Integer)session.getAttribute("userId"));
+
+
+        commitEntiy.setUserid(Integer.parseInt(session.getAttribute("userId").toString()));
+
         java.util.Date date = new java.util.Date();//获取一个Date对象
         Timestamp timeStamp = new Timestamp(date.getTime());//将日期时间转换为数据库中的timestamp类型
         commitEntiy.setCreatTime(String.valueOf(timeStamp));
         commitServiceInterface.addCommit(commitEntiy);
+        this.getAllCommit((Integer) session.getAttribute("musicId"),model,session);
         return "commit";
 
     }

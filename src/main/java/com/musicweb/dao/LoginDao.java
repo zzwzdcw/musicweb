@@ -14,7 +14,7 @@ public interface LoginDao {
      * @param account
      * @return
      */
-    @Select("select pwd from user where account=#{account} ")
+    @Select("select * from user where account=#{account} ")
     UserEntiy login(String account);
 
     /**

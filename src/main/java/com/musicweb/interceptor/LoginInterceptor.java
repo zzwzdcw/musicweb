@@ -21,8 +21,7 @@ public class LoginInterceptor implements HandlerInterceptor {
      * @throws Exception
      */
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         Object role = request.getSession().getAttribute("role");
         if (role == null || Integer.parseInt(role.toString())!=1)  {

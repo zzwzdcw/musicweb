@@ -16,21 +16,22 @@ public class LoginServiceImlp implements LoginServiceInterface{
     @Resource
     protected LoginDao loginDao;
     @Override
-    public String login(String account) {
+    public UserEntiy login(String account) {
 
+        UserEntiy userEntiy=new UserEntiy();
         String PwdInDB;
         try{
             System.out.println("server获取到account："+account);
 
-            UserEntiy user = loginDao.login(account);
-            PwdInDB= user.getPwd();
+            userEntiy = loginDao.login(account);
+            return userEntiy;
         }
         catch (java.lang.NullPointerException e){
             //如果数据库不存在对应的Account则设置PwdInUser为-1使得提示账号或密码错误！
             PwdInDB = "-1";
             System.out.println(PwdInDB);
         }
-        return PwdInDB;
+        return userEntiy;
     }
 
     @Override
@@ -49,6 +50,7 @@ public class LoginServiceImlp implements LoginServiceInterface{
         }
         return PwdInDB;
     }
+
 
     @Override
     public int selectRole(String account) {

@@ -29,20 +29,21 @@ public class LoginController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(UserEntiy user, Model model, HttpSession session)
     {
-
+        UserEntiy userEntiy = new UserEntiy();
         String account = user.getAccount();
         String pwd = user.getPwd();
         System.out.println("login登录开始");
         System.out.println("account:"+ account+"pwd:"+pwd);
-        //ModelAndView mv = new ModelAndView();
-        String pwdInDB = loginServiceInterface.login(account);
+        userEntiy= loginServiceInterface.login(account);
         String userCinPwd = DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT);
-        if (userCinPwd.equals(pwdInDB)) {
+        if (userCinPwd.equals(userEntiy.getPwd())) {
             System.out.println("密码正确");
             session.setAttribute("user",user);
-            if (loginServiceInterface.selectRole(account)==1)
-            {
+            session.setAttribute("userId",userEntiy.getId());
+            session.setAttribute("userimg",userEntiy.getImg());
 
+            if (userEntiy.getRole()==1)
+            {
                 System.out.println("是管理员写入session");
                 session.setAttribute("role",1);
             }
