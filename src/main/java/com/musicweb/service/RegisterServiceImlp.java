@@ -21,7 +21,9 @@ public class RegisterServiceImlp implements RegisterServiceInterface {
         System.out.println("注册" + "name:" + name + "pwd:" + pwd + "account:" + account + "pwd2" + pwd2);
 
         if (registerDao.hasUser(account)==null) {
-            int flag = registerDao.register(name, DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT), account);
+            //设置默认的角色为0
+            int role =0;
+            int flag = registerDao.register(name, DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT), account,role);
             if (flag != -1) {
                 System.out.println("注册成功！" + flag);
                 return flag;

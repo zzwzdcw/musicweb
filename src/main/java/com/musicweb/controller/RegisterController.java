@@ -18,13 +18,6 @@ public class RegisterController {
     private RegisterServiceInterface registerServiceInterface;
     @RequestMapping("/register")
    public String Register(String name,String account,String pwd,String pwd2,Model model){
-//        public String Register(Model model){
-
-//        String name= (String) model.getAttribute("namne");
-//        String pwd=(String)model.getAttribute("pwd");
-//        String pwd2=(String)model.getAttribute("pwd2");
-//        String account = (String) model.getAttribute("account");
-
         System.out.println("注册服务开始");
         System.out.println("获取到数据："+name+"    "+account+"    "+pwd +"   "+pwd2);
         String stat;

@@ -27,21 +27,29 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-
     public String login(UserEntiy user, Model model, HttpSession session)
-//    public String login(String account ,String pwd, Model model,HttpSession session )
     {
 
         String account = user.getAccount();
         String pwd = user.getPwd();
         System.out.println("login登录开始");
-        System.out.println("account:"+account+"pwd:"+pwd);
+        System.out.println("account:"+ account+"pwd:"+pwd);
         //ModelAndView mv = new ModelAndView();
         String pwdInDB = loginServiceInterface.login(account);
         String userCinPwd = DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT);
         if (userCinPwd.equals(pwdInDB)) {
             System.out.println("密码正确");
             session.setAttribute("user",user);
+            if (loginServiceInterface.selectRole(account)==1)
+            {
+
+                System.out.println("是管理员写入session");
+                session.setAttribute("role",1);
+            }
+            else {
+                System.out.println("不是管理员返回首页");
+                return "redirect:/";
+            }
              backstageController.hello(model);
             return "redirect:background/backstage";
         }
@@ -56,7 +64,9 @@ public class LoginController {
 
     @RequestMapping("/loginout")
     public String loginout (HttpSession session){
-        session.removeAttribute("user");
+//        session.removeAttribute("user");
+        //直接清除所有的内容
+        session.invalidate();
         return "redirect:/";
     }
 
@@ -64,4 +74,7 @@ public class LoginController {
     public String hello(){
         return "hello";
     }
+
+
+
 }

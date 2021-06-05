@@ -9,7 +9,7 @@ public class UserEntiy {
     protected String pwd;
     protected String account;
     protected String img;
-
+    protected int role;
     public String getImg() {
         return img;
     }
@@ -81,5 +81,13 @@ public class UserEntiy {
                 ", pwd='" + pwd + '\'' +
                 ", account='" + account + '\'' +
                 '}';
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

@@ -24,8 +24,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
 
-        Object user = request.getSession().getAttribute("user");
-        if (user == null || user.equals(""))  {
+        Object role = request.getSession().getAttribute("role");
+        if (role == null || Integer.parseInt(role.toString())!=1)  {
             response.sendRedirect("/Login");
             return false;
         }

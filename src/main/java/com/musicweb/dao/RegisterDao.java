@@ -16,7 +16,7 @@ public interface RegisterDao {
      * @return
      */
     @Insert("insert into user(name,pwd,account) values (#{name},#{pwd},#{account})")
-    int register(String name, String pwd, String account);
+    int register(String name, String pwd, String account , int role);
 
     /**
      * 注册的时候调用，查看数据库中是否已经存在这个用户。

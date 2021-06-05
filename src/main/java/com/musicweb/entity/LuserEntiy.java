@@ -2,7 +2,7 @@ package com.musicweb.entity;
 
 public class LuserEntiy {
 
-    protected Integer id;
+    protected int id;
     protected String name;
     protected String pwd;
     protected String account;
@@ -22,11 +22,11 @@ public class LuserEntiy {
     public LuserEntiy() {
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

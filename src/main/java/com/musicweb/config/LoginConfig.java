@@ -13,7 +13,7 @@ public class LoginConfig  extends WebMvcConfigurationSupport  {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         /**
-         * 拦截器，没有登录的用户不得访问后台
+         * 拦截器，角色不为1的不能访问后台
          *
          */
         registry.addInterceptor(new LoginInterceptor())
