@@ -38,6 +38,7 @@ public class LoginController {
         String userCinPwd = DigestUtils.sha3_256Hex(pwd).toUpperCase(Locale.ROOT);
         if (userCinPwd.equals(userEntiy.getPwd())) {
             System.out.println("密码正确");
+            session.setAttribute("userName",userEntiy.getName());
             session.setAttribute("user",user);
             session.setAttribute("userId",userEntiy.getId());
             session.setAttribute("userimg",userEntiy.getImg());
@@ -51,8 +52,10 @@ public class LoginController {
                 System.out.println("不是管理员返回首页");
                 return "redirect:/";
             }
-             backstageController.hello(model);
-            return "redirect:background/backstage";
+            return "redirect:/";
+
+//             backstageController.hello(model);
+//            return "redirect:background/backstage";
         }
        // return mv;
         return "redirect:Login";

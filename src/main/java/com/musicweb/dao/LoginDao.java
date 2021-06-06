@@ -17,6 +17,7 @@ public interface LoginDao {
     @Select("select * from user where account=#{account} ")
     UserEntiy login(String account);
 
+
     /**
      * 查询登录账号的角色
      * @param account

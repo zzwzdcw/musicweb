@@ -1,12 +1,16 @@
 package com.musicweb.controller;
 
 
+import com.musicweb.entity.UserEntiy;
 import com.musicweb.service.RegisterServiceInterface;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.Locale;
 import java.util.Objects;
 
 @Controller
@@ -45,4 +49,23 @@ public class RegisterController {
     public String Register(){
         return "Register";
     }
+
+    @RequestMapping("/UserInfo")
+    public String userinfo(HttpSession session,Model model){
+       model.addAttribute("user",registerServiceInterface.getOneUser(Integer.parseInt(session.getAttribute("userId").toString())));
+       return "user";
+    }
+
+    @RequestMapping("/modUserInfo")
+    public String moduserinfo(UserEntiy userEntiy, HttpSession session , Model model){
+        UserEntiy getuser = registerServiceInterface.getOneUser(Integer.parseInt(session.getAttribute("userId").toString()));
+        getuser.setImg(userEntiy.getImg());
+        getuser.setName(userEntiy.getName());
+        getuser.setPwd(DigestUtils.sha3_256Hex(userEntiy.getPwd()).toUpperCase(Locale.ROOT));
+//TODO 修改账户信息的功能没有做完呢
+
+
+        return "user";
+    }
 }
+

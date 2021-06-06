@@ -16,6 +16,11 @@ public class RegisterServiceImlp implements RegisterServiceInterface {
     protected RegisterDao registerDao;
 
     @Override
+    public UserEntiy getOneUser(int userid) {
+        return registerDao.getOneUser(userid);
+    }
+
+    @Override
     public int Register(String name, String account, String pwd, String pwd2) {
 
         System.out.println("注册" + "name:" + name + "pwd:" + pwd + "account:" + account + "pwd2" + pwd2);

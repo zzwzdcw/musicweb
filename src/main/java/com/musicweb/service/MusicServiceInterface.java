@@ -21,4 +21,6 @@ public interface MusicServiceInterface {
 
     List<MusicEntiy> selectAllAuthorMusic(String author);
 
+
+
 }
